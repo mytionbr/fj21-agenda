@@ -9,6 +9,6 @@
 <body>
 
 <hr/>
-	Copyright	2010	-	Todos	os	direitos	reservados
+	Copyright	2020	-	Todos	os	direitos	reservados
 </body>
 </html>
