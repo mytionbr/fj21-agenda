@@ -12,21 +12,37 @@
 	<jsp:useBean id="dao" class="br.com.caelum.jdbc.dao.ContatoDao"></jsp:useBean>
 	
 	<table>
-	<tr>
-		<th>Nome<th>
-		<th>Email<th>
-		<th>Endereço<th>
-		<th>Data de Nascimento<th>
-	</tr>
-	<c:forEach var="contato" items="${dao.lista}" varStatus="id">
-		<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
-			<td>${contato.nome}</td>
-			<td>${contato.email}</td>
-			<td>${contato.endereco}</td>
-			<td>${contato.dataNascimento.time}</td>
+		<tr>
+			<th>Nome<th>
+			<th>Email<th>
+			<th>Endereço<th>
+			<th>Data de Nascimento<th>
 		</tr>
-	
-	</c:forEach>
+		<c:forEach var="contato" items="${dao.lista}" varStatus="id">
+			<tr bgcolor="#${id.count % 2 == 0 ? 'aaee88' : 'ffffff' }">
+				<td>${contato.nome}</td>
+				<td>
+					<c:choose>
+						<c:when test="${ not empty contato.email}">
+							<a href="mailto:${contato.email}">${contato.email}</a> 
+						</c:when>
+						<c:otherwise>
+							Email não foi cadastrado!
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td>
+					<c:if test="${ not empty contato.endereco}">
+						${contato.endereco}
+					</c:if>
+					<c:if test="${ empty contato.endereco}">
+						Endereço não cadastrado!
+					</c:if>
+				</td>
+				<td>${contato.dataNascimento.time}</td>
+			</tr>
+		
+		</c:forEach>
 	</table>
 	
 </body>
