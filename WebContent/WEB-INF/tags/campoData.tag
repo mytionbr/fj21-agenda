@@ -1,6 +1,9 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ attribute name="id"  required="true"%>
-<input type="text" id="${id }" name="${id }">
-<script>
-	$("#${id}").datepicker({dateFormat: 'dd/MM/yyyy'});
-</script>
+
+<div class="form-group row">
+
+  <div class="col-10">
+    <input class="form-control" type="date" value="31/03/2020" id="${id }" name="${id }" id="example-date-input">
+  </div>
+</div>

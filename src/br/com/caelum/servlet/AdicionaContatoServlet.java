@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,14 +29,19 @@ public class AdicionaContatoServlet extends HttpServlet {
 		String	endereco = request.getParameter("endereco");
 		String	email = request.getParameter("email");
 		String	dataEmTexto	= request.getParameter("dataNascimento");
+		System.out.println(dataEmTexto);
 		Calendar dataNascimento	= null;
+		SimpleDateFormat conversor = new SimpleDateFormat("dd/MM/yyyy");
 		//	fazendo	a	conversão	da	data
 		try	{
-			Date date = new	SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
+			Date date = new	SimpleDateFormat("yyyy-MM-dd").parse(dataEmTexto);
+			String dataFormatadaString = conversor.format(date);
+			Date dataFormatada = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormatadaString);
+			System.out.println(dataFormatada);
 			dataNascimento	=	Calendar.getInstance();
-			dataNascimento.setTime(date);
+			dataNascimento.setTime(dataFormatada);
 		}catch(ParseException e) {
-			out.println("Erro	de	conversão	da	data");
+			out.println("Erro	de	conversão	da	data" + e);
 			return;	//para	a	execução	do	método
 		}
 		//	monta	um	objeto	contato
@@ -47,12 +53,16 @@ public class AdicionaContatoServlet extends HttpServlet {
 		//	salva	o	contato
 		ContatoDao	dao	=	new	ContatoDao();
 		dao.adiciona(contato);
-		//	imprime	o	nome	do	contato	que	foi	adicionado
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Contato	"	+	contato.getNome() + "	adicionado	com	sucesso");
-		out.println("</body>");
-		out.println("</html>");
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
+		rd.forward(request, response);
+//		//	imprime	o	nome	do	contato	que	foi	adicionado
+//		out.println("<html>");
+//		out.println("<body>");
+//		out.println("Contato	"	+	contato.getNome() + "	adicionado	com	sucesso");
+//		out.println("</body>");
+//		out.println("</html>");
 }
 
 
