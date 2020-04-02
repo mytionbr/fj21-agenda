@@ -71,7 +71,7 @@ public class ContatoDao {
 
 	}
 
-	public Contato pesquisaContato(int id) {
+	public Contato pesquisaContato(long id) {
 
 		try {
 			Contato contatoProcurado = new Contato();
