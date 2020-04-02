@@ -10,8 +10,8 @@
 </head>
 <body>
 	<c:import url="cabecalho.jsp" />
-	<!--	cria	o	DAO	-->
 	
+	<h2>${mensagem }</h2>
 
 	<table>
 		<tr>
@@ -46,6 +46,7 @@
 
 		</c:forEach>
 	</table>
+	<h3><a href="adiciona-contato.jsp">Adicione um novo contato</a> </h3>
 	<c:import url="rodape.jsp" />
 </body>
 </html>

@@ -1,6 +1,5 @@
 package br.com.caelum.mvc.logica;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,40 +10,41 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.jdbc.dao.ContatoDao;
 import br.com.caelum.jdbc.modelo.Contato;
 
-public class AlteraContatoLogic implements Logica{
+public class AdicionaContatoLogic implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		
 		String nome = req.getParameter("nome");
 		String email = req.getParameter("email");
 		String endereco = req.getParameter("endereco");
 		String dataEmTexto = req.getParameter("dataNascimento");
-		long id = Long.parseLong(req.getParameter("id"));
 		
 		Calendar dataNascimento = null;
 		
 		try {
-			Date data = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
+			Date dataPruta = new SimpleDateFormat("yyyy-MM-dd").parse(dataEmTexto);
+			String dataFormatada  = new SimpleDateFormat("dd/MM/yyyy").format(dataPruta);
+			Date data = new SimpleDateFormat("dd/MM/yyyy").parse(dataFormatada);
+			
 			dataNascimento = Calendar.getInstance();
 			dataNascimento.setTime(data);
-		} catch (ParseException e) {
+			
+		} catch (Exception e) {
 			new RuntimeException(e);
-			return "contato.jsp";
+			return "adiciona-contato.jsp";
 		}
 		Contato contato = new Contato();
 		contato.setNome(nome);
 		contato.setEmail(email);
 		contato.setEndereco(endereco);
 		contato.setDataNascimento(dataNascimento);
-		contato.setId(id);
 		
 		ContatoDao dao = new ContatoDao();
-		dao.altera(contato);
-		
-		System.out.println("Contato alterado com sucesso!!!!");
-		req.setAttribute("mensagem","O contato do " + contato.getNome() + " foi  alterado com sucesso!!!");
-		
+		dao.adiciona(contato);
+		req.setAttribute("mensagem","O contato do " + contato.getNome() + " foi cadastrado com sucesso!!!");
 		return "mvc?logica=ListaContatosLogic";
 	}
+	
 
 }
