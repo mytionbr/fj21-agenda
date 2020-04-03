@@ -46,7 +46,7 @@
 
 		</c:forEach>
 	</table>
-	<h3><a href="adiciona-contato.jsp">Adicione um novo contato</a> </h3>
+	<h3><a href="mvc?logica=ContatoLogic">Adicione um novo contato</a> </h3>
 	<c:import url="rodape.jsp" />
 </body>
 </html>

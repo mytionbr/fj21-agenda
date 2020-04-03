@@ -1,23 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="caelum"%>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Contato</title>
-	</head>
-	<body>
-		<c:import url="cabecalho.jsp" />
-		
-		<form action="mvc?logica=AlteraContatoLogic&id=${contato.id }" method="post">
-			<label>Nome</label><input type="text" value="${contato.nome }" name="nome"><br/>
-			<label>Email</label><input type="text" value="${contato.email }" name="email"><br/>
-			<label>Endereço</label><input type="text" value="${contato.endereco }" name="endereco"><br/>
-			<label>Data de Nascimento</label><input type="text" value='<fmt:formatDate value="${contato.dataNascimento.time }" pattern="dd/MM/yyyy"/>' name="dataNascimento"><br/>
-			<input type="submit" value="Alterar">
-		</form>
-		<c:import url="rodape.jsp" />
-	</body>
+<html>
+<head>
+<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+<script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+<body>
+<body>
+	<c:import url="cabecalho.jsp" />
+	<h1>Adiciona Contatos</h1>
+	<hr />
+	<form action="mvc?logica=SaveContatoLogic" method="post">
+		<label>Nome: </label><input type="text" name="nome" value="${contato.nome }"/><br />
+		<label>E-mail:</label><input type="text" name="email" value="${contato.email }"/><br />
+	    <label>Endereço: </label> <input type="text" name="endereco" value="${contato.endereco }"/><br /> 
+	    <label>Data do Nascimento</label>
+	    <div class="form-group row">
+		  <div class="col-10">
+		    <input class="form-control" type="date" value='<fmt:formatDate value="${contato.dataNascimento.time }" pattern="dd/MM/yyyy"/>' name="dataNascimento" id="dataNascimento">
+		  </div>
+		</div>
+		<input type="hidden" name="id" value="${contato.id }">
+	    <input type="submit" value="Gravar" />
+	</form>
+	<c:import url="rodape.jsp" />
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
 </html>

@@ -10,13 +10,17 @@ public class ContatoLogic implements Logica{
 
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		long id = Long.parseLong(req.getParameter("id"));
+		String idString = req.getParameter("id");  
 		
-		ContatoDao dao = new ContatoDao();
-		Contato contato = dao.pesquisaContato(id);
+		Contato contato = new Contato();
 		
+		if(idString != null){
+			long id = Long.parseLong(idString);
+			ContatoDao dao = new ContatoDao();
+		    contato = dao.pesquisaContato(id);
+		}
+				
 		req.setAttribute("contato", contato);
-		
 		return "contato.jsp";
 	}
 
