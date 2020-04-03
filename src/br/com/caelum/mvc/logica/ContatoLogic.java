@@ -21,7 +21,7 @@ public class ContatoLogic implements Logica{
 		}
 				
 		req.setAttribute("contato", contato);
-		return "contato.jsp";
+		return "/WEB-INF/jsp/contato.jsp";
 	}
 
 }
